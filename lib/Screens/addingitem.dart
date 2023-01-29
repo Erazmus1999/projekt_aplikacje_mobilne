@@ -74,6 +74,13 @@ class _AddingItemState extends State<AddingItem> {
               labelText: 'Salt',
             ),
           ),
+          Container(
+            decoration: BoxDecoration(
+              border: Border(
+                
+              ),
+            ),
+          ),
           Switch(
             value: vegan,
             activeColor: Colors.red,
