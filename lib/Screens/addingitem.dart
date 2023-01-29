@@ -7,11 +7,11 @@ class AddingItem extends StatelessWidget {
   AddingItem({super.key});
 
   final TextEditingController controllerCarbo = TextEditingController();
-  final TextEditingController controllerFat= TextEditingController();
-  final TextEditingController controllerKcal= TextEditingController();
-  final TextEditingController controllerProtein= TextEditingController();
-  final TextEditingController controllerSalt= TextEditingController();
-  final TextEditingController controllerVegan= TextEditingController();
+  final TextEditingController controllerFat = TextEditingController();
+  final TextEditingController controllerKcal = TextEditingController();
+  final TextEditingController controllerProtein = TextEditingController();
+  final TextEditingController controllerSalt = TextEditingController();
+  final TextEditingController controllerVegan = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
