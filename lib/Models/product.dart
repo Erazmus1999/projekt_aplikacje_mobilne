@@ -1,20 +1,20 @@
-class Product {
-  final String name;
-  final double carbo;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  final double fat;
-  final double kcal;
-  final double protein;
-  final double salt;
-  final bool vegan;
+part 'product.freezed.dart';
+part 'product.g.dart';
 
-  Product(
-    this.name,
-    this.carbo,
-    this.fat,
-    this.kcal,
-    this.protein,
-    this.salt,
-    this.vegan,
-  );
+@freezed
+class Product with _$Product {
+  const factory Product({
+    required String name,
+    required double carbo,
+    required double fat,
+    required double kcal,
+    required double protein,
+    required double salt,
+    required bool vegan,
+  }) = _Product;
+
+  factory Product.fromJson(Map<String, Object?> json) =>
+      _$ProductFromJson(json);
 }

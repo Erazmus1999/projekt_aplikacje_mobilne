@@ -24,6 +24,7 @@ class _AddingItemState extends State<AddingItem> {
   final TextEditingController controllerName = TextEditingController();
   bool vegan = true;
   final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,13 +135,13 @@ class _AddingItemState extends State<AddingItem> {
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     final Product product = Product(
-                      controllerName.text,
-                      double.parse(controllerCarbo.text),
-                      double.parse(controllerFat.text),
-                      double.parse(controllerKcal.text),
-                      double.parse(controllerProtein.text),
-                      double.parse(controllerSalt.text),
-                      vegan,
+                      name: controllerName.text,
+                      carbo: double.parse(controllerCarbo.text),
+                      fat: double.parse(controllerFat.text),
+                      kcal: double.parse(controllerKcal.text),
+                      protein: double.parse(controllerProtein.text),
+                      salt: double.parse(controllerSalt.text),
+                      vegan: vegan,
                     );
 
                     MyDatabase.addProduct(product);

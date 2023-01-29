@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:projekt_aplikacje_mobilne/Firebase/database.dart';
 import 'package:projekt_aplikacje_mobilne/Models/product.dart';
+import 'package:projekt_aplikacje_mobilne/Screens/add_fridge_item.dart';
 import 'package:projekt_aplikacje_mobilne/Screens/addingitem.dart';
 
 void main() async {
@@ -41,6 +42,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    MyDatabase.getAllItems();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -56,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const AddingItem(),
+              builder: (context) => const AddFridgeItem(),
             ),
           );
         },
