@@ -74,25 +74,15 @@ class _AddingItemState extends State<AddingItem> {
               labelText: 'Salt',
             ),
           ),
-          TextField(
-            controller: controllerVegan,
-            obscureText: false,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Vegan',
-            ),
-          ),
           Switch(
-          // This bool value toggles the switch.
             value: vegan,
             activeColor: Colors.red,
             onChanged: (bool value) {
-        // This is called when the user toggles the switch.
-            setState(() {
-            vegan = value;
-        });
-      },
-    ),
+              setState(() {
+                vegan = value;
+              });
+            },
+          ),
         ],
       )),
     );
