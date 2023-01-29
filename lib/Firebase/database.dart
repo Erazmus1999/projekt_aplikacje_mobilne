@@ -2,10 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projekt_aplikacje_mobilne/Models/product.dart';
 
 class MyDatabase {
-  static void getPotato() async {
-    CollectionReference<Map<String, dynamic>> firestore =
-        FirebaseFirestore.instance.collection('product');
-    var temp = await firestore.doc('potato').get();
+  static void getItem(collectionPath) async {
+    CollectionReference<Map<String, dynamic>> firestore = FirebaseFirestore.instance.collection(collectionPath);
+    var temp = await firestore.doc().get();
   }
 
   static void addProduct(Product product) async {
