@@ -85,6 +85,7 @@ class _AddingItemState extends State<AddingItem> {
             ),
             child: Row(
               children: [
+                SizedBox(width: 10,),
                 Text('Vegan'),
                 SizedBox(width: 5,),
                 Switch(
