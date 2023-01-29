@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:projekt_aplikacje_mobilne/Firebase/database.dart';
 import 'package:projekt_aplikacje_mobilne/Models/product.dart';
+import 'package:projekt_aplikacje_mobilne/Screens/addingitem.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -74,7 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddingItem()));
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
