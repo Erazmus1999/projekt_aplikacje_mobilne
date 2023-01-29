@@ -3,9 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class AddingItem extends StatelessWidget {
-  AddingItem({super.key});
+class AddingItem extends StatefulWidget {
+  const AddingItem({super.key});
 
+  @override
+  State<AddingItem> createState() => _AddingItemState();
+}
+
+class _AddingItemState extends State<AddingItem> {
   final TextEditingController controllerCarbo = TextEditingController();
   final TextEditingController controllerFat = TextEditingController();
   final TextEditingController controllerKcal = TextEditingController();
@@ -13,6 +18,7 @@ class AddingItem extends StatelessWidget {
   final TextEditingController controllerSalt = TextEditingController();
   final TextEditingController controllerVegan = TextEditingController();
   final TextEditingController controllerName = TextEditingController();
+  bool vegan = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +28,7 @@ class AddingItem extends StatelessWidget {
         children: [
           TextField(
             controller: controllerName,
-            obscureText: true,
+            obscureText: false,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Name',
@@ -30,7 +36,7 @@ class AddingItem extends StatelessWidget {
           ),
           TextField(
             controller: controllerCarbo,
-            obscureText: true,
+            obscureText: false,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Carbo',
@@ -38,7 +44,7 @@ class AddingItem extends StatelessWidget {
           ),
           TextField(
             controller: controllerFat,
-            obscureText: true,
+            obscureText: false,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Fat',
@@ -46,7 +52,7 @@ class AddingItem extends StatelessWidget {
           ),
           TextField(
             controller: controllerKcal,
-            obscureText: true,
+            obscureText: false,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Kcal',
@@ -54,7 +60,7 @@ class AddingItem extends StatelessWidget {
           ),
           TextField(
             controller: controllerProtein,
-            obscureText: true,
+            obscureText: false,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Protein',
@@ -62,7 +68,7 @@ class AddingItem extends StatelessWidget {
           ),
           TextField(
             controller: controllerSalt,
-            obscureText: true,
+            obscureText: false,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Salt',
@@ -70,12 +76,23 @@ class AddingItem extends StatelessWidget {
           ),
           TextField(
             controller: controllerVegan,
-            obscureText: true,
+            obscureText: false,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Vegan',
             ),
           ),
+          Switch(
+          // This bool value toggles the switch.
+            value: vegan,
+            activeColor: Colors.red,
+            onChanged: (bool value) {
+        // This is called when the user toggles the switch.
+            setState(() {
+            vegan = value;
+        });
+      },
+    ),
         ],
       )),
     );
