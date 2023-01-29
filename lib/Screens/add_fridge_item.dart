@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:projekt_aplikacje_mobilne/Firebase/database.dart';
 import 'package:projekt_aplikacje_mobilne/Models/product.dart';
 import 'package:projekt_aplikacje_mobilne/Screens/addingitem.dart';
+import 'package:projekt_aplikacje_mobilne/config/constants.dart';
 import 'package:projekt_aplikacje_mobilne/config/extensions.dart';
 import 'package:projekt_aplikacje_mobilne/config/validators.dart';
 
@@ -17,11 +18,16 @@ class AddFridgeItem extends StatefulWidget {
 class _AddFridgeItemState extends State<AddFridgeItem> {
   late List<Product> items;
   Product? selectedProduct;
+  DateTime? selectedDateTime;
   final formKey = GlobalKey<FormState>();
   final controller = TextEditingController();
+  final dateTimeController = TextEditingController();
+  final future = MyDatabase.getAllItems();
+
   @override
   void initState() {
     super.initState();
+    future;
   }
 
   @override
@@ -37,7 +43,7 @@ class _AddFridgeItemState extends State<AddFridgeItem> {
             runSpacing: 20,
             children: [
               FutureBuilder<List<Product>>(
-                future: MyDatabase.getAllItems(),
+                future: future,
                 initialData: const <Product>[],
                 builder: (BuildContext context,
                     AsyncSnapshot<List<Product>> snapshot) {
@@ -87,12 +93,36 @@ class _AddFridgeItemState extends State<AddFridgeItem> {
                         labelText: 'Grams',
                       ),
                     ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: dateTimeController,
+                      validator: (text) => Validators.notEmpty(text),
+                      readOnly: true,
+                      onTap: () => showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                      ).then((value) {
+                        selectedDateTime = value;
+                        dateTimeController.text =
+                            showableFormat.format(value!).toString();
+                      }),
+                      decoration: const InputDecoration(
+                        suffixIcon: Icon(Icons.calendar_month),
+                        border: OutlineInputBorder(),
+                        labelText: 'Expiration Date',
+                      ),
+                    ),
                   ],
                 ),
               ),
               ElevatedButton(
                 onPressed: () {
-                  if (formKey.currentState!.validate()) {
+                  if (formKey.currentState!.validate() &&
+                      selectedProduct != null) {
                     //TODO: add to fridge
                   }
                 },
