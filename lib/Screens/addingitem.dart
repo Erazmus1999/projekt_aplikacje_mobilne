@@ -77,18 +77,27 @@ class _AddingItemState extends State<AddingItem> {
           Container(
             decoration: BoxDecoration(
               border: Border(
-                
+                bottom: BorderSide(
+                  color: Colors.black,
+                  width: 1,
+                ),
               ),
             ),
-          ),
-          Switch(
-            value: vegan,
-            activeColor: Colors.red,
-            onChanged: (bool value) {
-              setState(() {
-                vegan = value;
-              });
-            },
+            child: Row(
+              children: [
+                Text('Vegan'),
+                SizedBox(width: 5,),
+                Switch(
+                  value: vegan,
+                  activeColor: Colors.red,
+                  onChanged: (bool value) {
+                    setState(() {
+                      vegan = value;
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       )),
