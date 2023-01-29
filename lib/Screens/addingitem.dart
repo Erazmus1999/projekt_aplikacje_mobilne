@@ -12,6 +12,7 @@ class AddingItem extends StatelessWidget {
   final TextEditingController controllerProtein = TextEditingController();
   final TextEditingController controllerSalt = TextEditingController();
   final TextEditingController controllerVegan = TextEditingController();
+  final TextEditingController controllerName = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +20,14 @@ class AddingItem extends StatelessWidget {
       body: Container(
           child: Column(
         children: [
+          TextField(
+            controller: controllerName,
+            obscureText: true,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Name',
+            ),
+          ),
           TextField(
             controller: controllerCarbo,
             obscureText: true,
