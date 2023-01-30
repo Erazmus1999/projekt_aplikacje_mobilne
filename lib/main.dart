@@ -7,6 +7,7 @@ import 'package:projekt_aplikacje_mobilne/Firebase/database.dart';
 import 'package:projekt_aplikacje_mobilne/Models/product.dart';
 import 'package:projekt_aplikacje_mobilne/Screens/add_fridge_item.dart';
 import 'package:projekt_aplikacje_mobilne/Screens/addingitem.dart';
+import 'package:projekt_aplikacje_mobilne/Screens/login_popup.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,12 +41,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  void _update(int something){
+    setState(() {
+    });
+  }
   @override
   Widget build(BuildContext context) {
     MyDatabase.getAllItems();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          TextButton(
+              onPressed: (){
+                showDialog(context: context,
+                    builder: (context) => LoginPopup(),);
+              }, child: Text(
+            'Login',
+              style: TextStyle(
+                color: Colors.greenAccent,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+          ),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
