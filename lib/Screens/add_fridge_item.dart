@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -7,6 +8,7 @@ import 'package:projekt_aplikacje_mobilne/Screens/addingitem.dart';
 import 'package:projekt_aplikacje_mobilne/config/constants.dart';
 import 'package:projekt_aplikacje_mobilne/config/extensions.dart';
 import 'package:projekt_aplikacje_mobilne/config/validators.dart';
+import 'package:projekt_aplikacje_mobilne/utils/util_functions.dart';
 
 class AddFridgeItem extends StatefulWidget {
   const AddFridgeItem({super.key});
@@ -122,8 +124,20 @@ class _AddFridgeItemState extends State<AddFridgeItem> {
               ElevatedButton(
                 onPressed: () {
                   if (formKey.currentState!.validate() &&
-                      selectedProduct != null) {
-                    //TODO: add to fridge
+                      selectedProduct != null &&
+                      selectedDateTime != null) {
+                    if (FirebaseAuth.instance.currentUser != null) {
+                      MyDatabase.addProductToFridge(
+                        productName: selectedProduct!.name,
+                        expirationDate: selectedDateTime!,
+                        grams: controller.text,
+                        userId: FirebaseAuth.instance.currentUser!.email!,
+                      ).then(
+                        (value) => Navigator.pop(context),
+                      );
+                    } else {
+                      showToast('Log in first');
+                    }
                   }
                 },
                 style: ElevatedButton.styleFrom(
