@@ -69,16 +69,17 @@ class MyDatabase {
   }
 
   static Future<void> addGramsToProduct(
-      String userId, String productName, double grams) async {
-    print(userId);
-    print(productName);
+      String userId, String productName, String grams) async {
+    if (double.tryParse(grams) == null) return;
+
     final fridge = await FirebaseFirestore.instance
         .collection('fridges')
         .doc(userId)
         .get();
 
     if (fridge.exists) {
-      final gramsToEmit = double.parse(fridge.data()![productName][0]) + grams;
+      final gramsToEmit =
+          double.parse(fridge.data()![productName][0]) + double.parse(grams);
       final expirationDate = fridge.data()![productName][1];
 
       await FirebaseFirestore.instance.collection('fridges').doc(userId).set(

@@ -56,8 +56,8 @@ class FridgeItem extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                MyDatabase.addGramsToProduct(userId, product.product.name,
-                        double.parse(controller.text))
+                MyDatabase.addGramsToProduct(
+                        userId, product.product.name, controller.text)
                     .then((value) => onChanged());
                 controller.clear();
               },
