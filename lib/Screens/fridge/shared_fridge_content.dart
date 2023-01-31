@@ -50,7 +50,7 @@ class _SharedFridgeContentState extends State<SharedFridgeContent> {
                                     if (snapshot.connectionState ==
                                         ConnectionState.done) {
                                       return SizedBox(
-                                        height: 100,
+                                        height: 150,
                                         child: ListView.separated(
                                           shrinkWrap: true,
                                           physics:

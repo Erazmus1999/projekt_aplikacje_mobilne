@@ -53,7 +53,7 @@ class _FridgeContentState extends State<FridgeContent> {
               if (snapshot.connectionState == ConnectionState.done) {
                 print('${snapshot.data!.length} items');
                 return SizedBox(
-                  height: 200,
+                  height: 150,
                   child: ListView.separated(
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
