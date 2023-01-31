@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:projekt_aplikacje_mobilne/Firebase/database.dart';
+import 'package:projekt_aplikacje_mobilne/Models/fridge_item/fridge_item_model.dart';
 import 'package:projekt_aplikacje_mobilne/Models/product.dart';
 import 'package:projekt_aplikacje_mobilne/Screens/fridge/fridge_item.dart';
 import 'package:projekt_aplikacje_mobilne/Screens/share_fridge_popup.dart';
 import 'package:projekt_aplikacje_mobilne/config/extensions.dart';
 
-class FridgeContent extends StatelessWidget {
+class FridgeContent extends StatefulWidget {
   const FridgeContent({
     super.key,
     required this.userId,
   });
 
   final String userId;
+
+  @override
+  State<FridgeContent> createState() => _FridgeContentState();
+}
+
+class _FridgeContentState extends State<FridgeContent> {
+  Future<List<FridgeItemModel>> getProducts() =>
+      MyDatabase.getAllUserProducts(widget.userId);
 
   @override
   Widget build(BuildContext context) {
@@ -39,22 +48,29 @@ class FridgeContent extends StatelessWidget {
           height: 50,
         ),
         FutureBuilder(
-            future: MyDatabase.getAllUserProducts(userId),
+            future: getProducts(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 print('${snapshot.data!.length} items');
                 return SizedBox(
-                  height: 100,
+                  height: 150,
                   child: ListView.separated(
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemCount: snapshot.data!.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return FridgeItem(product: snapshot.data![index]);
+                      return FridgeItem(
+                        product: snapshot.data![index],
+                        userId: widget.userId,
+                        onChanged: () {
+                          setState(() {});
+                        },
+                      );
                     },
-                    separatorBuilder: (context, index) =>
-                        const VerticalDivider(),
+                    separatorBuilder: (context, index) => const VerticalDivider(
+                      thickness: 2,
+                    ),
                   ),
                 );
               } else {

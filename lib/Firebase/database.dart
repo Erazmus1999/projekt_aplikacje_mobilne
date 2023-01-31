@@ -68,6 +68,26 @@ class MyDatabase {
     }
   }
 
+  static Future<void> addGramsToProduct(
+      String userId, String productName, double grams) async {
+    final fridge = await FirebaseFirestore.instance
+        .collection('fridges')
+        .doc(userId)
+        .get();
+
+    if (fridge.exists) {
+      final gramsToEmit = double.parse(fridge.data()![productName][0]) + grams;
+      final expirationDate = fridge.data()![productName][1];
+
+      await FirebaseFirestore.instance.collection('fridges').doc(userId).set(
+        {
+          productName: [gramsToEmit.toString(), expirationDate]
+        },
+        SetOptions(merge: true),
+      );
+    }
+  }
+
   static Future<List<FridgeItemModel>> getAllUserProducts(String userId) async {
     final fridge = await FirebaseFirestore.instance
         .collection('fridges')
@@ -103,9 +123,7 @@ class MyDatabase {
 
         productList.add(model);
       }
-      productList.sort(
-        (a,b)=> a.expirationDate.compareTo(b.expirationDate)
-      );
+      productList.sort((a, b) => a.expirationDate.compareTo(b.expirationDate));
 
       return productList;
     }
