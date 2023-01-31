@@ -26,7 +26,7 @@ class Auth {
         showToast('Wrong email format');
       }
       else{
-        print(e.code);
+        showToast('Something went wrong');
       }
     }
   }
@@ -43,6 +43,9 @@ class Auth {
       }
       if (e.code == 'email-already-in-use') {
         showToast('The account already exists for that email.');
+      }
+      else{
+        showToast('Something went wrong');
       }
     }
   }

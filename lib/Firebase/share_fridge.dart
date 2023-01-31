@@ -9,7 +9,6 @@ class ShareFridge {
     if (await checkIfUserExists(username)) {
       List<String> sharedFridges = await getUserSharedFridges(username);
       sharedFridges.add(username);
-      print('aaaaaaaa ${sharedFridges.length}');
       await sharingCollection
           .doc(username)
           .update({"shared": FieldValue.arrayUnion(sharedFridges)});

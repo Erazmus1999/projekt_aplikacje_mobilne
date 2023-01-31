@@ -26,23 +26,20 @@ class FridgeContent extends StatelessWidget {
       child: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 'Your fridge Content:',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
-              ElevatedButton.icon(
+              IconButton(
                 onPressed: () {
                   showDialog(
                     context: context,
                     builder: (context) => shareFridgePopup(),
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                ),
                 icon: const Icon(Icons.ios_share),
-                label: const Text(""),
               ),
             ],
           ),
