@@ -103,6 +103,9 @@ class MyDatabase {
 
         productList.add(model);
       }
+      productList.sort(
+        (a,b)=> a.expirationDate.compareTo(b.expirationDate)
+      );
 
       return productList;
     }
