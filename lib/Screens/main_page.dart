@@ -4,9 +4,11 @@ import 'package:projekt_aplikacje_mobilne/Firebase/database.dart';
 import 'package:projekt_aplikacje_mobilne/Screens/add_fridge_item.dart';
 import 'package:projekt_aplikacje_mobilne/Screens/auth/login_popup.dart';
 import 'package:projekt_aplikacje_mobilne/Screens/fridge/fridge_content.dart';
+import 'package:projekt_aplikacje_mobilne/Screens/fridge/shared_fridge_content.dart';
+
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title,});
 
   final String title;
 
@@ -75,6 +77,18 @@ class _MyHomePageState extends State<MyHomePage> {
               builder: (context, snapshot) {
                 if (snapshot.data != null) {
                   return FridgeContent(
+                    userId: snapshot.data!.email!,
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              },
+            ),
+            StreamBuilder(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.data != null) {
+                  return SharedFridgeContent(
                     userId: snapshot.data!.email!,
                   );
                 } else {
