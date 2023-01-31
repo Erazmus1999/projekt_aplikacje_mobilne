@@ -28,6 +28,9 @@ class SharedFridgeContent extends StatelessWidget {
                   for (int i = 0; i < snapshot.data!.length; i++)
                     Column(
                       children: [
+                        Divider(
+                          thickness: 2,
+                        ),
                         Text(
                           snapshot.data![i].substring(0,snapshot.data![i].indexOf("@")),
                           style: Theme.of(context).textTheme.headlineMedium,
@@ -51,7 +54,7 @@ class SharedFridgeContent extends StatelessWidget {
                                           product: snapshot.data![index]);
                                     },
                                     separatorBuilder: (context, index) =>
-                                        const VerticalDivider(),
+                                        const VerticalDivider(thickness: 2,),
                                   ),
                                 );
                               } else {

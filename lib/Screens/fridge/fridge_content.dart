@@ -15,65 +15,56 @@ class FridgeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        border: Border(
-            bottom: BorderSide(
-          color: Colors.black,
-          width: 2,
-        )),
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Your fridge Content:',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              IconButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => shareFridgePopup(),
-                  );
-                },
-                icon: const Icon(Icons.ios_share),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          FutureBuilder(
-              future: MyDatabase.getAllUserProducts(userId),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  print('${snapshot.data!.length} items');
-                  return SizedBox(
-                    height: 100,
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return FridgeItem(product: snapshot.data![index]);
-                      },
-                      separatorBuilder: (context, index) =>
-                          const VerticalDivider(),
-                    ),
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              }),
-          const SizedBox(
-            height: 50,
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Your fridge Content:',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => shareFridgePopup(),
+                );
+              },
+              icon: const Icon(Icons.ios_share),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 50,
+        ),
+        FutureBuilder(
+            future: MyDatabase.getAllUserProducts(userId),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                print('${snapshot.data!.length} items');
+                return SizedBox(
+                  height: 100,
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return FridgeItem(product: snapshot.data![index]);
+                    },
+                    separatorBuilder: (context, index) =>
+                        const VerticalDivider(),
+                  ),
+                );
+              } else {
+                return const CircularProgressIndicator();
+              }
+            }),
+        const SizedBox(
+          height: 50,
+        ),
+      ],
     );
   }
 }
