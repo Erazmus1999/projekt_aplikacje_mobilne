@@ -46,8 +46,8 @@ class _SharedFridgeContentState extends State<SharedFridgeContent> {
                               FutureBuilder(
                                   future: MyDatabase.getAllUserProducts(
                                       snapshot.data![i]),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
+                                  builder: (context, s) {
+                                    if (s.connectionState ==
                                         ConnectionState.done) {
                                       return SizedBox(
                                         height: 150,
@@ -56,11 +56,11 @@ class _SharedFridgeContentState extends State<SharedFridgeContent> {
                                           physics:
                                               const BouncingScrollPhysics(),
                                           scrollDirection: Axis.horizontal,
-                                          itemCount: snapshot.data!.length,
+                                          itemCount: s.data!.length,
                                           itemBuilder: (BuildContext context,
                                               int index) {
                                             return FridgeItem(
-                                              product: snapshot.data![index],
+                                              product: s.data![index],
                                               userId:
                                                   snapshot.data![i].toString(),
                                               onChanged: () {

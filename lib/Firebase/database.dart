@@ -70,6 +70,8 @@ class MyDatabase {
 
   static Future<void> addGramsToProduct(
       String userId, String productName, double grams) async {
+    print(userId);
+    print(productName);
     final fridge = await FirebaseFirestore.instance
         .collection('fridges')
         .doc(userId)
