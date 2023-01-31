@@ -61,7 +61,8 @@ class _SharedFridgeContentState extends State<SharedFridgeContent> {
                                               int index) {
                                             return FridgeItem(
                                               product: snapshot.data![index],
-                                              userId: widget.userId,
+                                              userId:
+                                                  snapshot.data![i].toString(),
                                               onChanged: () {
                                                 setState(() {});
                                               },
